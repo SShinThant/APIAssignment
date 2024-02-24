@@ -11,9 +11,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class ApiController extends Controller
 {
     //Register API
-
     public function register(Request $request) {
-
         $request->validate([
             "name" => "required",
             "email" => "required|email|unique:users",
@@ -34,8 +32,7 @@ class ApiController extends Controller
         ]);
     }
 
-    //Login API
-    
+    //Login API  
     public function login(Request $request) {
 
         $request->validate([
@@ -60,15 +57,11 @@ class ApiController extends Controller
         return response()->json([
             "status" => false,
             "message" => "Invalid Login Details"
-        ]);
-
-        
+        ]);       
     }
 
     //Profile API
-
     public function profile() {
-
         $userData = auth()->user();
 
         return response()->json([
@@ -76,13 +69,10 @@ class ApiController extends Controller
             "message" => "Profile Data",
             "user" => $userData
         ]);
-
     }
 
     //Refresh Token API
-
     public function refreshToken() {
-
         $newToken = auth()->refresh();
 
         return response()->json([
@@ -90,19 +80,15 @@ class ApiController extends Controller
             "message" => "New Access Token Generated",
             "token" => $newToken
         ]);
-
     }
 
     //Logout API
-
     public function logout() {
-
         auth()->logout();
 
         return response()->json([
             "status" => true,
             "message" => "User Logged Out Successfully"
         ]);
-
     }
 }
